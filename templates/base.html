@@ -1,0 +1,31 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en" dir="rtl">
+
+<head>
+    {% include 'include/head.html' %}
+</head>
+
+
+<body class="font-Dana bg-[#f3f4f6] text-zinc-900 dark:bg-zinc-900 dark:text-white overflow-x-hidden transition-all">
+<!-- ALL ICONS  -->
+{% include 'include/icons.html' %}
+
+ <header>
+     {% include 'include/header.html' %}
+    </header>
+
+{% block content %}
+
+{% endblock %}
+
+    <footer class="relative mt-14 lg:mt-32 text-gray-300 bg-zinc-800 pt-8">
+        {% include 'include/footer.html' %}
+    </footer>
+
+    <!-- OVERLAY -->
+    {% include 'include/overlay.html' %}
+</body>
+
+</html>

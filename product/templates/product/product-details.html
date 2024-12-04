@@ -1,0 +1,306 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+    <main class="container child:mt-8" xmlns="http://www.w3.org/1999/html">
+        <!-- Breadcrumbs -->
+        <section>
+            <ul class="flex items-center gap-x-2 text-gray-400 text-sm lg:text-base">
+                <li class="flex items-center gap-x-2">
+                    <a href="{% url 'home:landing' %}">صفحه اصلی</a>
+                    <svg class="w-4 h-4">
+                        <use href="#chevron-left"></use>
+                    </svg>
+                </li>
+                <li class="flex items-center gap-x-2">
+                    <a href="{% url 'product:list' %}"> فروشگاه</a>
+                    <svg class="w-4 h-4">
+                        <use href="#chevron-left"></use>
+                    </svg>
+                </li>
+                <li class="flex items-center gap-x-2">
+                    <a href="shop.html">جزییات محصول</a>
+                </li>
+            </ul>
+        </section>
+        <!-- PRODUCT DETAILS SECTION -->
+        <section
+                class="flex flex-col lg:flex-row items-start gap-4 child:rounded-lg child:bg-white child:dark:bg-zinc-700 child:shadow child:p-4">
+            <!-- IMAGE & INFO BOX Container -->
+
+
+            <div class="w-full lg:w-3/4 flex flex-col gap-y-8 ">
+                <!-- IMAGE & INFO BOX -->
+                <div class="flex flex-col lg:flex-row gap-5">
+                    <!-- SLIDER & ACTION BTN  -->
+                    <div class="flex  lg:w-96 flex-col gap-y-4">
+                        <!-- SLIDER -->
+
+                        <div class="swiper mt-2 w-full porduct-details-slider rounded-lg">
+                            <div class="swiper-wrapper">
+                                <div class="swiper-slide">
+                                    <img src="{{ product.image1.url }}"
+                                         class="rounded-lg shadow w-full  object-cover lg:w-96 lg:h-fit" alt="">
+                                </div>
+                                <div class="swiper-slide">
+                                    <img src="{{ product.image2.url }}"
+                                         class="rounded-lg shadow w-full  object-cover lg:w-96 lg:h-fit" alt="">
+                                </div>
+                                <div class="swiper-slide">
+                                    <img src="{{ product.image3.url }}"
+                                         class="rounded-lg shadow w-full  object-cover lg:w-96 lg:h-fit" alt="">
+                                </div>
+                                <div class="swiper-slide">
+                                    <img src="{{ product.image4.url }}"
+                                         class="rounded-lg shadow w-full  object-cover lg:w-96 lg:h-fit" alt="">
+                                </div>
+                            </div>
+                            <div class="swiper-pagination"></div>
+                        </div>
+                    </div>
+                    <!-- INFO (TITLE , NAME , ...) -->
+                    <div class="flex flex-col gap-y-4 w-full">
+                        <!-- NAME -->
+                        <div class="flex items-start justify-between border-b border-b-gray-200 py-2">
+                            <div class="flex flex-col gap-y-1">
+                                <h3 class="text-2xl font-MorabbaMedium">{{ product.title }}</h3>
+                            </div>
+                        </div>
+
+                        {% for category in product.category.all %}
+
+                            <div class="flex gap-x-1 text-gray-400 ">
+                                <svg class="w-5 h-5">
+                                    <use href="#list-bullet"></use>
+                                </svg>
+                                <p>دسته‌بندی : {{ category.title }}</p>
+                            </div>
+                        {% endfor %}
+                        <p class="mt-2 font-DanaMedium">ویژگی های محصول :</p>
+                        <div
+                                class="grid grid-cols-12 gap-4 child:col-span-12 xl:child:col-span-6 child:dark:bg-zinc-800 child:bg-gray-100 child:h-12 child:rounded-lg child:text-sm child:flex child:items-center child:justify-center">
+                            <div>
+                                <p class="text-zinc-600 dark:text-gray-400">گونه : 50% عربیکا و 50% ربوستا</p>
+                            </div>
+                            {% for amountcaffeine in product.amountcaffeine.all %}
+                                <div>
+                                    <p class="text-zinc-600 dark:text-gray-400">
+                                        میزان کافئین : {{ amountcaffeine.title }}
+                                    </p>
+                                </div>
+                            {% endfor %}
+                            <div>
+                                <p class="text-zinc-600 dark:text-gray-400">
+                                    خاستگاه : {{ product.origin }}
+                                </p>
+
+                            </div>
+                            <div>
+                                <p class="text-zinc-600 dark:text-gray-400">مواد تشکیل‌دهنده
+                                    : {{ product.ingredient }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div
+                        class="lg:mr-2 grid grid-cols-12 child:col-span-6 xl:child:col-span-3 gap-x-1 gap-y-2 lg:gap-4 child:border child:text-gray-400 child:dark:border-white/20 child:border-gray-200 child:rounded-lg child:h-12  child:p-2 child:flex child:items-center child:gap-x-1 lg:child:gap-x-2 child:text-sm lg:text-base">
+                    <span>
+                        <svg class="w-4 h-4 lg:w-6 lg:h-6">
+                            <use href="#arrow-path-rounded-square"></use>
+                        </svg>
+                        <p>ضمانت بازگشت کالا</p>
+                    </span>
+                    <span>
+                        <svg class="w-4 h-4 lg:w-6 lg:h-6">
+                            <use href="#check-badge"></use>
+                        </svg>
+                        <p>
+                            تضمین اصالت کالا
+                        </p>
+                    </span>
+                    <span>
+                        <svg class="w-4 h-4 lg:w-6 lg:h-6">
+                            <use href="#calender-day"></use>
+                        </svg>
+                        <p>پشتیبانی کل هفته</p>
+                    </span>
+                    <span>
+                        <svg class="w-4 h-4 lg:w-6 lg:h-6">
+                            <use href="#truke"></use>
+                        </svg>
+                        <p>ارسال به سراسر ایران </p>
+                    </span>
+                </div>
+                <div class="lg:mr-2">
+                    <h2 class="font-MorabbaMedium text-2xl pb-1 mb-2 ">معرفی محصول
+                    </h2>
+                    <p class="leading-10 text-gray-600 dark:text-gray-300">
+                        {{ product.introduction }}
+                    </p>
+                </div>
+            </div>
+            <!-- PRICE & ADD TO CART BOX -->
+
+            <div class="w-full lg:w-1/4 lg:sticky top-5 flex flex-col gap-y-6">
+                <!-- PRICE -->
+
+
+                <div class="flex items-center gap-x-1">
+                    <p class="text-2xl font-DanaDemiBold">{{ product.price }}</p>
+                    <p class="">تومان</p>
+                </div>
+                <form method="post" action="{% url 'cart:add_cart' product.id %}">
+
+
+                    <input type="text" name="quantity" value="1" class="custom-input mr-4 text-lg bg-transparent">
+
+
+                    <button
+                            class="w-full flex items-center gap-x-1 justify-between dark:bg-zinc-800 dark:text-gray-400  bg-gray-100 transition-all rounded-lg py-2 px-2 xl:px-3 font-DanaMedium text-sm xl:text-base">
+                        <p> قیمت :</p>
+                        <p>{{ product.price }} تومان</p>
+                    </button>
+
+                    {% csrf_token %}
+                    <button
+                            class="w-full flex items-center gap-x-1 justify-center bg-green-500 text-white hover:bg-green-600 transition-all rounded-lg shadow py-2">
+                        افزودن به سبد خرید
+                        <svg class="w-5 h-5">
+                            <use href="#shopping-bag"></use>
+                        </svg>
+                    </button>
+                </form>
+                <div class="text-sm  text-gray-400 flex xl:items-center gap-x-1">
+                    <svg class="w-5 h-5">
+                        <use href="#info"></use>
+                    </svg>
+                </div>
+
+            </div>
+
+
+        </section>
+
+        <!-- COMMENTS -->
+        <section class="w-full rounded-lg bg-white dark:bg-zinc-700 shadow p-5">
+            <div class="flex items-center gap-x-2 mb-6">
+                <h2 class="font-MorabbaMedium text-2xl ">
+                    دیدگاه ها
+                </h2>
+            </div>
+
+
+            <div class="flex flex-col lg:flex-row items-start gap-10">
+                <!-- SUBMIT COMMENT -->
+
+                <div class="lg:w-1/4 flex flex-col w-full ">
+                    <form method="post">
+                        {% csrf_token %}
+                        <p class="font-DanaMedium text-lg mb-2">ثبت دیدگاه</p>
+                        <input type="text" name="title" placeholder="عنوان" class="tailwind-input">
+
+                        <div class="grid grid-cols-12 child:col-span-6 gap-4 child:w-full  child:flex child:items-center child:justify-center child:gap-x-2 child:rounded-lg child:shadow child:py-2 mb-5 child:font-DanaMedium child:duration-300
+                        child:transition-all">
+                        </div>
+                        <textarea class="h-24 tailwind-input" placeholder="متن دیدگاه" name="text"></textarea>
+                        <button
+                                class="rounded-lg p-2 bg-green-500 hover:bg-green-600 text-white transition-all">ثبت
+                        </button>
+                    </form>
+                </div>
+
+
+                <!-- ALL COMMENTS -->
+                <ul class="lg:w-3/4 flex flex-col gap-y-2 child:w-full  ">
+                    <!-- COMMENT ITEMS -->
+                    {% for item in product.product.all %}
+                        <li class="child:flex py-4 border-b border-gray-200 child:border-white/20">
+                            <!-- TITLE -->
+                            <div class="flex items-center gap-x-2">
+                                <h2 class="font-DanaMedium text-lg mb-1">{{ item.title }}</h2>
+                            </div>
+                            <!-- COOMENT TEXT -->
+                            <div class="flex-col">
+                                <p class="text-gray-500 dark:text-gray-200 mb-2 line-clamp-2">
+                                    {{ item.text }}
+                                </p>
+                            </div>
+                            <!-- COMMENT FOOTER -->
+                            <div class="mt-2 lg:mt-0 flex-col lg:flex-row gap-y-2 lg:items-center justify-between">
+                                <div class="flex items-center gap-x-4 text-gray-400 text-sm">
+                                    <p>{{ item.create.date }}</p>
+                                    <p>{{ item.user }}</p>
+                                </div>
+                            </div>
+                        </li>
+                    {% endfor %}
+                </ul>
+
+            </div>
+        </section>
+        <!--  Products slider -->
+        <section class="mt-10">
+            <!-- TITLE -->
+            <div class="flex items-center justify-between mb-12">
+                <div class="flex flex-col gap-y-2">
+                    <h2 class="font-MorabbaMedium text-xl lg:text-3xl">
+                        محصولات مرتبط
+                    </h2>
+                </div>
+                <div
+                        class="flex items-center gap-x-2 child:p-2 child:bg-white child:dark:bg-zinc-700 child:shadow child:rounded-full">
+                    <button class="prev-slide ">
+                        <svg class="w-4 h-4">
+                            <use href="#chevron-right"></use>
+                        </svg>
+                    </button>
+                    <button class="next-slide ">
+                        <svg class="w-4 h-4">
+                            <use href="#chevron-left"></use>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            <!-- SLIDER  -->
+            <div class="swiper BestSelling rounded-lg" dir="rtl">
+                <div
+                        class="swiper-wrapper rounded-lg mb-2 child:cursor-pointer child:overflow-hidden child:rounded-lg child:bg-white child:dark:bg-zinc-700 child:shadow child:w-64 child:relative">
+                    <!-- PRODUCT ITEM -->
+                    {% for recent in recent_product %}
+                        <div class="swiper-slide group">
+
+                            <!-- PRODUCT IMGAE -->
+                            <img src="{{ recent.image1.url }}" alt="product-1"
+                                 class="group-hover:scale-105 duration-300 w-32 h-32 lg:w-48 lg:h-48 mx-auto mb-3"/>
+                            <!-- PRODUCT MAIN -->
+                            <div class="px-2 lg:px-4 mb-3">
+                                <a href="{% url 'product:detail' recent.id %}"
+                                   class="line-clamp-2 font-DanaMedium mb-2 text-sm lg:text-base">
+                                    {{ recent.title }}
+                                </a>
+                                <div class="flex items-center gap-x-1 lg:gap-x-3">
+                                    <p class="font-DanaDemiBold text-green-600 dark:text-green-500">
+                                        {{ recent.price }}
+                                        <span class="font-Dana text-sm">تومان</span>
+                                    </p>
+                                </div>
+                            </div>
+                            <!-- PRODUCT FOOTER -->
+                            <div class="flex items-center justify-between px-2 lg:px-4 mb-3">
+                                <div class="flex items-center gap-x-2 child:transition-all child:duration-300">
+                                <span
+                                        class="rounded-full p-2 dark:bg-zinc-800 dark:hover:bg-green-500 bg-gray-100 hover:bg-green-600 hover:text-white">
+                                    <svg class="w-4 h-4">
+                                        <use href="#shopping-cart"></use>
+                                    </svg>
+                                </span>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+
+                </div>
+            </div>
+        </section>
+    </main>
+{% endblock %}

@@ -1,0 +1,136 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+    <main class="container child:mt-8">
+        <!-- Breadcrumbs -->
+        <section>
+            <ul class="flex items-center gap-x-2 text-gray-400 text-sm lg:text-base">
+                <li class="flex items-center gap-x-2">
+                    <a href="{% url 'home:landing' %}">صفحه اصلی</a>
+                    <svg class="w-4 h-4">
+                        <use href="#chevron-left"></use>
+                    </svg>
+                </li>
+                <li class="flex items-center gap-x-2">
+                <a href="{% url 'cart:cart' %}">سبد خرید</a>
+                </li>
+            </ul>
+        </section>
+        <!-- shopping cart -->
+        <section
+            class="flex flex-col lg:flex-row items-start gap-4 child:rounded-lg child:bg-white child:dark:bg-zinc-700 child:shadow child:p-4">
+            <!-- products -->
+            <div class="w-full lg:w-2/3 flex flex-col gap-y-8 ">
+                <!-- shopping cart header -->
+                <div class="flex items-center justify-between">
+                    <span class="flex items-center gap-x-2">
+                        <h2 class="font-DanaMedium text-xl">سبد خرید</h2>
+                    </span>
+                </div>
+                <!-- PRODUCT ITEMS -->
+                {% if cart.total != 0 %}
+
+                <div
+                    class="w-full flex flex-col gap-y-4 child:p-2 lg:child:p-4 child:border-b-2 child:border-gray-200 child:dark:border-white/20 ">
+                    <!-- PRODUCT ITEM -->
+                    {% for item in cart %}
+                    <div class="w-full flex justify-between relative">
+                        <div class="flex flex-col sm:flex-row items-center gap-6">
+                            <!-- IMG AND COUNT BTN -->
+                            <div class="flex w-fit flex-col">
+                                <img src="{{ item.product.image1.url }}" class="w-36" alt="">
+                            </div>
+                            <!-- information and name product -->
+                            <div class="flex flex-col gap-y-2">
+                                <h2 class="font-DanaMedium">
+                                    {{ item.product.title }} </h2>
+
+                                <ul
+                                    class="space-y-3 child:text-sm text-gray-400 child:flex child:items-center child:gap-x-1">
+                                    <li>
+                                        <svg class="w-5 h-5">
+                                            <use href="#truke"></use>
+                                        </svg>
+                                        <p class="mt-1">ارسال پست پیشتاز</p>
+                                    </li>
+                                    <li class="text-green-500">
+                                        <svg class="w-5 h-5">
+                                            <use href="#check-badge"></use>
+                                        </svg>
+                                        <p class="mt-1"> تضمین کیفیت</p>
+                                    </li>
+                                    <li class="text-green-500">
+                                        <svg class="w-5 h-5">
+                                            <use href="#check-badge"></use>
+                                        </svg>
+                                        <p class="mt-1">تعداد : {{ item.quantity }}</p>
+                                    </li>
+                                </ul>
+                                <span class="flex items-center gap-x-1 text-green-500 mt-4">
+                                    <p class="font-DanaMedium text-xl">{{ item.price }}</p>
+                                    <p class="text-lg">تومان</p>
+                                </span>
+
+                                <svg class=" flex sm:hidden absolute top-0 left-0 w-5 h-5">
+                                    <use href="#close"></use>
+                                </svg>
+
+                            </div>
+                        </div>
+                        <div class="hidden sm:flex items-end justify-between flex-col">
+                            <a href="{% url 'cart:delete' item.unique_id %}">
+                            <svg class="w-5 h-5 cursor-pointer">
+                                <use href="#close"></use>
+                            </svg>
+                                </a>
+                        </div>
+                    </div>
+                    {% endfor %}
+
+                </div>
+            </div>
+                    <div class="w-full lg:w-1/3 lg:sticky top-5 flex flex-col gap-y-4">
+                <!-- PRICE -->
+                <ul class="child:flex child:items-center child:justify-between space-y-8">
+                    <li>
+                        <p>جمع مبلغ سفارش :</p>
+                        <p class="font-DanaMedium text-green-500">{{ cart.total }} تومان</p>
+                    </li>
+                    <li>
+                        <p>تخفیف :</p>
+                        <p class="font-DanaMedium text-red-600 dark:text-gray-200">------------</p>
+                    </li>
+                    <li class="border-t-2 border-dashed border-gray-400 pt-8">
+                        <p> مبلغ قابل پرداخت :</p>
+                        <p>{{ cart.total }} تومان</p>
+                    </li>
+                </ul>
+
+                <a href="{% url 'cart:order_create' %}" class="w-full mt-4 flex items-center gap-x-1 justify-center bg-green-500 text-white hover:bg-green-600 transition-all rounded-lg shadow py-2">
+                    نهایی کردن خرید
+                    <svg class="w-5 h-5">
+                        <use href="#shopping-bag"></use>
+                    </svg>
+                </a>
+
+            </div>
+            {% else %}
+            <!-- Empty shopping cart -->
+            <div class="w-full lg:w-2/3 h-80 items-center flex-col justify-center gap-y-4 ">
+                <h2 class="font-DanaMedium text-xl lg:text-2xl">سبد خرید شما خالی میباشد!</h2>
+                <svg class="lg:w-16 w-10 h-10 lg:h-16">
+                    <use href="#shopping-cart"></use>
+                </svg>
+                <a href="{% url 'product:list' %}" class="main-btn bg-blue-500 hover:bg-blue-600 py-2 font-DanaMedium px-20">
+                    برو به فروشگاه
+                    <svg class="w-5 h-5">
+                        <use href="#chevron-left"></use>
+                    </svg>
+
+                </a>
+            </div>
+        {% endif %}
+        </section>
+    </main>
+{% endblock %}

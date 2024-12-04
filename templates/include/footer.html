@@ -1,0 +1,102 @@
+{% load static %}
+
+        <div class="container">
+
+
+            <div class="flex mt-8 items-center justify-between flex-col lg:flex-row gap-y-10 lg:gap-x-20 flex-wrap">
+                <div class="flex flex-col gap-y-2 w-full lg:w-[30%]">
+                    <!-- LOGO -->
+                    <a href="{% url 'home:landing' %}" class="text-green-500 transition-colors w-fit block">
+                        <p class="font-MorabbaBold text-3xl">کافئین</p>
+                        <p class="tracking-tighter">حس نو با قهوه...</p>
+                    </a>
+                    <!-- ABOUTE -->
+                    <p class="leading-8">
+                        در فروشگاه آنلاین ما، بهترین دانه‌های قهوه از سراسر جهان را با
+                        کیفیت بالا و طعمی بی‌نظیر برای شما فراهم آورده‌ایم. با انتخاب
+                        محصولات ما، لذت یک فنجان قهوه عالی را در خانه تجربه کنید.
+                    </p>
+                </div>
+
+                <div class="flex flex-col gap-y-2 w-full lg:w-auto">
+                    <h2 class="font-DanaDemiBold text-lg mb-3">- دسترسی سریع</h2>
+                    <div class="flex gap-x-10 child:space-y-2">
+                        <ul class="child-hover:text-green-500 child:transition-all">
+                            <li>
+                                <a href="{% url 'home:landing' %}">صفحه اصلی</a>
+                            </li>
+                            <li>
+                                <a href="{% url 'product:list' %}">فروشگاه</a>
+                            </li>
+                            <li>
+                                <a href="{% url 'contact:contact' %}">تماس با ما </a>
+                            </li>
+                            <li>
+                                <a href="{% url 'contact:question' %}">سوالات متداول </a>
+                            </li>
+                        </ul>
+                        <ul class="child-hover:text-green-500 child:transition-colors">
+                            <li>
+                                <a href="{% url 'account:signin' %}"> ثبت نام | ورود </a>
+                            </li>
+                            <li>
+                                <a href="{% url 'article:article_list' %}">وبلاگ</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="flex flex-col gap-y-5 w-full lg:w-auto">
+                    <h2 class="font-DanaDemiBold text-lg">- تماس با ما</h2>
+                    <div
+                        class="flex items-center gap-x-1 lg:gap-x-2 hover:text-green-500 transition-colors cursor-pointer">
+                        <svg class="w-5 h-5">
+                            <use href="#map"></use>
+                        </svg>
+                        <p class="line-clamp-1">
+                            بلوار آزادی، خیابان استاد معین، کوچه گلستان، پلاک ۱۰
+                        </p>
+                    </div>
+
+                    <div
+                        class="flex lg:items-center flex-col gap-y-2 lg:flex-row gap-x-5 child:cursor-pointer child-hover:text-green-500 child:transition-colors">
+                        <span class="flex items-start gap-x-2">
+                            <svg class="w-5 h-5">
+                                <use href="#envelope"></use>
+                            </svg>
+                            <p>coffein@info.com</p>
+                        </span>
+
+                        <span class="flex items-start gap-x-2">
+                            <svg class="w-5 h-5">
+                                <use href="#phone"></use>
+                            </svg>
+                            <p>0923-122-3311</p>
+                            <p class="mr-2">0926-002-2737</p>
+                        </span>
+                    </div>
+
+                    <div class="flex items-start justify-start gap-x-10">
+                        <button class="flex items-center gap-x-2">
+                            <p dir="ltr">@coffeepages</p>
+                            <img src="{% static 'Images/svg/instagram.png'%}" class="w-6 h-6" alt="instagram" />
+                        </button>
+                        <button class="flex items-center gap-x-2">
+                            <p dir="ltr">@coffeepages</p>
+                            <img src="{% static 'Images/svg/telegram.png' %}" class="w-6 h-6" alt="instagram" />
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- COPY RIGTH -->
+        <div class="bg-zinc-900">
+            <div class="container  mt-12 py-2 flex flex-col lg:flex-row gap-y-2 lg:items-center lg:justify-between">
+                <p class="text-sm lg:text-base">
+                    تمام حقوق این سایت متعلق به
+                    <a href="index.html" class="text-green-500 font-DanaMedium">کافئین</a>
+                    میباشد
+                </p>
+                <p class="text-sm">Copyright © 2024 Coffee. All rights reserved.</p>
+            </div>
+        </div>
