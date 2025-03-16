@@ -71,27 +71,20 @@
                 <svg class="h-5 w-5 hidden lg:flex">
                     <use href="#user"></use>
                 </svg>
-                <p href="dashboard.html"> حساب کاربری</p>
+                <p href="dashboard.html"> {{ user.phone }}</p>
                 <!-- SUB MENU  -->
                 <div class="absolute dark:border-none border border-gray-100 w-52 p-4 bg-white text-zinc-900 dark:text-white flex flex-col gap-y-3 opacity-0 invisible group-hover:opacity-100 group-hover:visible group-hover:top-12 transition-all delay-100 dark:bg-zinc-800 top-20 rounded text-base shadow child:transition-all child:py-1 child:px-2">
-{#                    <a href="dashboard-orders.html"#}
-{#                       class="flex items-center gap-x-3 w-full hover:bg-green-500/20 hover:text-green-500 rounded">#}
-{#                        <svg class="h-5 w-5">#}
-{#                            <use href="#user"></use>#}
-{#                        </svg>#}
-{#                        سفارشات من#}
-{#                    </a>#}
+                    <a href="{% url 'dashboard:dashboard' %}"
+                       class="flex items-center gap-x-3 w-full hover:bg-green-500/20 hover:text-green-500 rounded">
+                        <svg class="h-5 w-5">
+                            <use href="{% url 'dashboard:dashboard' %}"></use>
+                        </svg>
+                        سفارشات من
+                    </a>
 {#                    <a href="dashboard-messages.html"#}
 {#                       class="flex items-center gap-x-3 w-full hover:bg-green-500/20 hover:text-green-500 rounded">#}
 {#                        <svg class="h-5 w-5">#}
 {#                            <use href="#envelope"></use>#}
-{#                        </svg>#}
-{#                        لیست پیام ها#}
-{#                    </a>#}
-{#                    <a href="dashboard-account.html"#}
-{#                       class="flex items-center gap-x-3 w-full hover:bg-green-500/20 hover:text-green-500 rounded">#}
-{#                        <svg class="h-5 w-5">#}
-{#                            <use href="#cog"></use>#}
 {#                        </svg>#}
 {#                        اطلاعات کاربری#}
 {#                    </a>#}

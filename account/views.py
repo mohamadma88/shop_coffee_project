@@ -1,12 +1,15 @@
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
-from django.shortcuts import render, redirect, reverse
+from django.shortcuts import render, redirect, reverse, get_object_or_404
 from django.views import View
+from sqlparse import format
+
 from .forms import LoginForm, RegisterForm, CheckOtpForm, CreateAddress
 from .models import Otp
 import random
 from uuid import uuid4
 from django.contrib.auth import get_user_model
+from account.models import Address
 
 User = get_user_model()
 
@@ -96,3 +99,23 @@ class AddAddress(View):
             next_page = request.GET.get('next')
             if next_page:
                 return redirect(next_page)
+        return render(request, 'dashboard/dashboard.html')
+
+
+def edit_address(request, pk):
+    form = CreateAddress()
+    address = get_object_or_404(Address, pk=pk, user=request.user)
+    if request.method == 'POST':
+        form = CreateAddress(request.POST, instance=address)
+        if form.is_valid():
+            form.save()
+            return redirect('dashboard:dashboard_address')
+        else:
+            form = CreateAddress(request.POST, instance=address)
+    return render(request, 'account/edit_address.html', {'form': form})
+
+
+def delete_address(request, pk):
+    address = get_object_or_404(Address, user=request.user, pk=pk)
+    address.delete()
+    return redirect('dashboard:dashboard_address')

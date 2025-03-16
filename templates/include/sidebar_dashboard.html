@@ -1,0 +1,115 @@
+
+
+<div class="sticky top-5 h-full hidden lg:block lg:w-1/4  xl:w-1/5 rounded-l-lg p-4 shadow bg-white dark:bg-zinc-700">
+                <!-- NAME AND -->
+                <div class="flex items-center justify-between border-b border-gray-200 dark:border-white/20 py-3">
+                    <div class="flex items-center gap-x-3">
+                        <span class="felx flex-col gap-y-2">
+                            <p class="font-DanaMedium text-lg">کاربر عزیز:</p>
+                            <p class="text-gray-400">{{ user.phone }}</p>
+                        </span>
+                    </div>
+                    <span>
+                        <svg class="w-6 h-6 cursor-pointer text-green-500">
+                            <use href="#edit"></use>
+                        </svg>
+                    </span>
+                </div>
+                <!-- MENU -->
+                <ul
+                        class="relative mt-4 space-y-2 child:duration-300 child:transition-all child:py-3  child:px-2 child:flex child:gap-x-2 text-lg child:cursor-pointer child:rounded-lg">
+                    <li class="{% if request.resolver_match.url_name == 'dashboard' %}active bg-green-500/10 text-green-500{% endif %}">
+                        <svg class="w-6 h-6 ">
+                            <use href="#squares"></use>
+                        </svg>
+                        <a href="{% url 'dashboard:dashboard' %}">داشبورد</a>
+                    </li>
+                    <li class="{% if request.resolver_match.url_name == 'orders' %}active bg-green-500/10 text-green-500{% endif %}">
+                        <svg class="w-6 h-6 ">
+                            <use href="#shopping-bag"></use>
+                        </svg>
+                        <a href="{% url 'dashboard:orders' %}">
+                            سفارش ها
+                        </a>
+                    </li>
+                    <li class="{% if request.resolver_match.url_name == 'favorite' %}active bg-green-500/10 text-green-500{% endif %}">
+                        <svg class="w-6 h-6 ">
+                            <use href="#heart"></use>
+                        </svg>
+                        <a href="{% url 'dashboard:favorite' %}">علاقه‌مندی ها</a>
+                    </li>
+                    <li class="{% if request.resolver_match.url_name == 'address' %}active bg-green-500/10 text-green-500{% endif %}">
+                        <svg class="w-6 h-6 ">
+                            <use href="#map"></use>
+                        </svg>
+                        <a href="{% url 'dashboard:address' %}">آدرس ها</a>
+                    </li>
+
+                    <li class="text-red-400 hover:bg-red-500/20">
+                        <svg class="w-6 h-6 ">
+                            <use href="#arrow-left-start-on-rectangle"></use>
+                        </svg>
+                        <a href="{% url 'account:signout' %}">خروج از حساب </a>
+                    </li>
+                </ul>
+            </div>
+            <!-- SDEBAR MOBILE -->
+            <div
+                    class="sidebar-mobile flex flex-col lg:hidden fixed -right-64 top-0 bottom-0 w-64 bg-white dark:bg-zinc-700 z-50 shadow transition-all duration-300 px-4">
+                <!-- NAME -->
+                <div class="flex items-center justify-between border-b border-gray-200 dark:border-white/20 py-3">
+                    <div class="flex items-center gap-x-3">
+                        <span class="felx flex-col gap-y-2">
+                            <p class="font-DanaMedium">کاربر :</p>
+                            <p class="text-gray-400 text-sm">{{ user.phone }}</p>
+                        </span>
+                    </div>
+                    <span class="close-sidebar-btn">
+                        <svg class="w-5 h-6 cursor-pointer">
+                            <use href="#close"></use>
+                        </svg>
+                    </span>
+                </div>
+                <!-- MENU -->
+                <ul
+                        class="relative mt-4 space-y-2 child:duration-300 child:transition-all child:p-2 child:flex child:items-center child:gap-x-2  child:cursor-pointer child:rounded-lg">
+                    <li class="{% if request.resolver_match.url_name == 'dashboard' %}active bg-green-500/10 text-green-500{% endif %}">
+                        <svg class="w-5 h-5 ">
+                            <use href="#squares"></use>
+                        </svg>
+                        <a href="{% url 'dashboard:dashboard' %}">داشبورد</a>
+                    </li>
+                    <li class="{% if request.resolver_match.url_name == 'orders' %}active bg-green-500/10 text-green-500{% endif %}">
+                        <svg class="w-5 h-5 ">
+                            <use href="#shopping-bag"></use>
+                        </svg>
+                        <a href="{% url 'dashboard:orders' %}">
+                            سفارش ها
+                        </a>
+                    </li>
+                    <li class="{% if request.resolver_match.url_name == 'favorite' %}active bg-green-500/10 text-green-500{% endif %}">
+                        <svg class="w-5 h-5 ">
+                            <use href="#heart"></use>
+                        </svg>
+                        <a href="{% url 'dashboard:favorite' %}">علاقه‌مندی ها</a>
+                    </li>
+                    <li class="hover:bg-zinc-100 dark:hover:bg-zinc-600">
+                        <svg class="w-5 h-5 ">
+                            <use href="#map"></use>
+                        </svg>
+                        <a href="../../dashboard/templates/dashboard/dashboard-address.html">آدرس ها</a>
+                    </li>
+                    <li class="hover:bg-zinc-100 dark:hover:bg-zinc-600">
+                        <svg class="w-5 h-5 ">
+                            <use href="#home"></use>
+                        </svg>
+                        <a href="{% url 'home:landing' %}"> صفحه اصلی</a>
+                    </li>
+                    <li class="text-red-500 hover:bg-red-500/20">
+                        <svg class="w-5 h-5 ">
+                            <use href="#arrow-left-start-on-rectangle"></use>
+                        </svg>
+                        <a href="{% url 'account:signout' %}">خروج از حساب </a>
+                    </li>
+                </ul>
+            </div>

@@ -11,8 +11,8 @@ class Article(models.Model):
     image = models.ImageField(verbose_name='عکس')
     Introduction = models.TextField(verbose_name='مقدمه')
     text = models.TextField(verbose_name='بدنه مقاله')
-    ingredient = models.TextField(verbose_name='مواد لازم')
-    recipe = models.TextField(verbose_name='رسپی')
+    ingredient = models.TextField(blank=True,null=True,verbose_name='مواد لازم')
+    recipe = models.TextField(verbose_name='رسپی' , blank=True,null=True)
     pub = models.BooleanField(verbose_name='منتشر شود؟')
     created_at = jmodels.jDateTimeField(auto_now_add=True,verbose_name='تاریخ انتشار')
 

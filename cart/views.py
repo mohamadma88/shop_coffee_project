@@ -35,12 +35,15 @@ class OrderDetail(View):
 
 
 class OrderCreation(View):
-    def get(self,request):
+    def get(self, request):
         cart = Cart(request)
-        order = Order.objects.create(user=request.user,total_price=cart.total())
-        for item in cart :
-            OrderItem.objects.create(order=order,product=item['product'],quantity=item['quantity'], price=item['price'])
+        order = Order.objects.create(user=request.user, total_price=cart.total())
+        for item in cart:
+            OrderItem.objects.create(order=order, product=item['product'], quantity=item['quantity'],
+                                     price=item['price'])
 
             cart.remove_cart()
             return redirect('cart:order', order.id)
+
+
 

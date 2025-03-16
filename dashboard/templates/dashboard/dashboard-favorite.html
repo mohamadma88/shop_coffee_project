@@ -1,0 +1,137 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+    <!-- panel -->
+    <main>
+        <!--  PANLE -->
+        <section class="flex flex-col h-screen items-start lg:flex-row">
+            <!-- SIDEBAR DESKTOP -->
+            {% include 'include/sidebar_dashboard.html' %}
+            <!-- MAIN  -->
+            <div class="lg:w-3/4 xl:w-4/5 lg:m-5 w-full">
+                <!-- NAVBAR -->
+                <div class=" bg-white dark:bg-zinc-700 p-5 lg:rounded-lg shadow flex items-center justify-between">
+                    <p class="font-DanaMedium text-lg hidden lg:block"> پارسا وصالی عزیز؛ خوش اومدی 🙌 </p>
+                    <button class="open-sidebar-btn flex lg:hidden items-center gap-x-1">
+                        <svg class="w-6 h-6">
+                            <use href="#bars"></use>
+                        </svg>
+                        داشبورد
+                    </button>
+                    <div class="flex items-center gap-x-3">
+                        <button class="relative flex items-center justify-end notif-toggle-btn">
+                            <svg class="w-6 h-6">
+                                <use href="#bell"/>
+                            </svg>
+                            <!-- BADGE -->
+                            <span
+                                    class="absolute -top-1.5 -right-2 w-4 h-4 text-[10px] flex items-center justify-center bg-red-500 text-white rounded-full">2</span>
+                            <!-- NOTIFICATION BOX -->
+                            <div
+                                    class="notif-box absolute -left-6  dark:border-none border border-gray-100 w-72 p-4 bg-white text-zinc-900 dark:text-white  hidden top-8 transition-all delay-100 dark:bg-zinc-800 rounded shadow child:transition-all z-40">
+                                <span class="justify-between flex items-center border-b border-gray-200 pb-2">
+                                    <p> اعلان ها</p>
+                                    <p class="text-green-500 flex text-sm items-center gap-x-0.5">
+                                        همه
+                                        <svg class="w-3 h-3">
+                                            <use href="#chevron-left"></use>
+                                        </svg>
+                                    </p>
+                                </span>
+                                <ul
+                                        class="mt-4 child:flex child:items-center child:gap-x-1 child:w-full child:rounded-lg child:bg-zinc-100 child:p-2 space-y-3 dark:child:bg-zinc-700">
+                                    <li>
+                                        <svg class="w-5 h-5 text-green-500 ">
+                                            <use href="#check"></use>
+                                        </svg>
+                                        <p class="font-Dan aMedium text-green-500">پرداخت شده</p>
+                                    </li>
+                                    <li>
+                                        <svg class="w-5 h-5 text-red-500 ">
+                                            <use href="#x-close"></use>
+                                        </svg>
+                                        <p class="font-Dan aMedium text-red-500">پرداخت لغو شد</p>
+                                    </li>
+                                </ul>
+                            </div>
+                        </button>
+                        <!-- TOGGLE BTN -->
+                        <button class="toggle-theme">
+                            <svg class="inline-block dark:hidden w-6 h-6">
+                                <use href="#moon"/>
+                            </svg>
+                            <svg class="hidden dark:inline w-6 h-6">
+                                <use href="#sun"/>
+                            </svg>
+                        </button>
+                        <a href="index.html" class="hidden lg:flex items-center gap-x-0.5 text-green-500">
+                            صفحه اصلی
+                            <svg class="w-4 h-4">
+                                <use href="#chevron-left"></use>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                <div class="m-5 lg:m-0">
+                    <p class="font-DanaMedium block lg:hidden"> پارسا وصالی عزیز؛ خوش اومدی 🙌 </p>
+                    <div class="grid grid-cols-12 gap-6 lg:gap-12 mt-6">
+
+                        <div class="col-span-12">
+                            <p class="text-lg">محصولات مورد علاقه من:</p>
+
+                            <div
+                                    class="mt-4 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 xl:grid-cols-4 gap-3 xl:gap-8 child:cursor-pointer child:overflow-hidden child:rounded-lg child:bg-white child:dark:bg-zinc-700 child:shadow  child:relative">
+                                <!-- PRODUCT ITEM -->
+                                {% for product in product %}
+                                    <div class="group">
+                                        <!-- PRODUCT IMGAE -->
+                                        <img src="{{ product.image1.url }}" alt="product-1"
+                                             class="group-hover:scale-105 duration-300 w-32 h-32 lg:w-48 lg:h-48 mx-auto mb-3"/>
+                                        <!-- PRODUCT MAIN -->
+                                        <div class="px-2 lg:px-4 mb-3">
+                                            <a href="{% url 'product:detail' product.pk %}"
+                                               class="line-clamp-2 font-DanaMedium mb-2 text-sm lg:text-base">
+                                                {{ product.title }}
+                                            </a>
+                                            <div class="flex items-center gap-x-1 lg:gap-x-3">
+                                                <p class="font-DanaDemiBold text-green-600 dark:text-green-500">
+                                                    {{ product.price }}
+                                                    <span class="font-Dana text-sm">تومان</span>
+                                                </p>
+
+                                            </div>
+                                        </div>
+
+                                        <!-- PRODUCT FOOTER -->
+                                        <div class="flex items-center justify-between px-2 lg:px-4 mb-3">
+                                            <div class="flex items-center gap-x-2 child:transition-all child:duration-300">
+                                            <span
+                                                    class="rounded-full p-2 dark:bg-zinc-800 dark:hover:bg-green-500 bg-gray-100 hover:bg-green-600 hover:text-white">
+                                                <svg class="w-4 h-4">
+                                                    <use href="#shopping-cart"></use>
+                                                </svg>
+                                            </span>
+                                                <span class="hover:text-green-600">
+                                                <svg class="w-4 h-4">
+                                                    <use href="#heart"></use>
+                                                </svg>
+                                            </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+{% endblock %}
+<!-- OVERLAY -->
+<div class="overlay hidden fixed w-full h-full top-0 left-0 right-0 bg-black/40 z-40 transition-all duration-300">
+</div>
+
+<!-- ==========================  APP JS ============================= -->
+<script src="./scripts/Panel.js"></script>

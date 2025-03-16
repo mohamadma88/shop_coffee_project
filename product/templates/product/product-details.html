@@ -19,7 +19,7 @@
                     </svg>
                 </li>
                 <li class="flex items-center gap-x-2">
-                    <a href="shop.html">جزییات محصول</a>
+                    <a href="{% url 'product:detail' product.pk %}">جزییات محصول</a>
                 </li>
             </ul>
         </section>
@@ -28,13 +28,38 @@
                 class="flex flex-col lg:flex-row items-start gap-4 child:rounded-lg child:bg-white child:dark:bg-zinc-700 child:shadow child:p-4">
             <!-- IMAGE & INFO BOX Container -->
 
-
             <div class="w-full lg:w-3/4 flex flex-col gap-y-8 ">
                 <!-- IMAGE & INFO BOX -->
+
                 <div class="flex flex-col lg:flex-row gap-5">
                     <!-- SLIDER & ACTION BTN  -->
-                    <div class="flex  lg:w-96 flex-col gap-y-4">
-                        <!-- SLIDER -->
+
+                    <!-- SLIDER -->
+
+                    <div class="  lg:w-96 flex-col gap-y-4">
+                        {% if like %}
+
+                            {#                        <button onclick="like('{{ product.pk }}')" id="like-{{ product.pk }}"#}
+                            {#                                class="'rounded-full p-1.5 border-2 border-gray-200 dark:border-white/20 '">#}
+                            <button>
+                                <a onclick="like('{{ product.pk }}')"
+                                   id="like" class="">
+                                    <svg class=" w-5 h-5">
+                                        <use href='#heart'></use>
+                                    </svg>
+                                </a>
+                            </button>
+                        {% else %}
+                            <button>
+                                <a onclick="like('{{ product.pk }}')"
+                                   id="like" class="hover:text-green-600">
+                                    <svg class=" w-5 h-5">
+                                        <use href="#heart"></use>
+                                    </svg>
+                                </a>
+                            </button>
+
+                        {% endif %}
 
                         <div class="swiper mt-2 w-full porduct-details-slider rounded-lg">
                             <div class="swiper-wrapper">
@@ -139,6 +164,7 @@
                     </p>
                 </div>
             </div>
+
             <!-- PRICE & ADD TO CART BOX -->
 
             <div class="w-full lg:w-1/4 lg:sticky top-5 flex flex-col gap-y-6">

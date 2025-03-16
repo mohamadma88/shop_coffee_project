@@ -1,0 +1,165 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+    <!-- panel -->
+    <main>
+        <!--  PANLE -->
+        <section class="flex flex-col xl:h-screen items-start lg:flex-row">
+            <!-- SIDEBAR DESKTOP -->
+
+            {% include 'include/sidebar_dashboard.html' %}
+
+            <!-- MAIN  -->
+            <div class="lg:w-3/4 xl:w-4/5 lg:m-5 w-full">
+                <!-- NAVBAR -->
+                <div class=" bg-white dark:bg-zinc-700 p-5 lg:rounded-lg shadow flex items-center justify-between">
+                    <p class="font-DanaMedium text-lg hidden lg:block"> {{ user.phone }}؛ خوش اومدی 🙌 </p>
+                    <button class="open-sidebar-btn flex lg:hidden items-center gap-x-1">
+                        <svg class="w-6 h-6">
+                            <use href="#bars"></use>
+                        </svg>
+                        داشبورد
+                    </button>
+                    <div class="flex items-center gap-x-3">
+                        <a href="{% url 'home:landing' %}" class="hidden lg:flex items-center gap-x-0.5 text-green-500">
+                            صفحه اصلی
+                            <svg class="w-4 h-4">
+                                <use href="#chevron-left"></use>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                <div class="m-5 lg:m-0">
+                    <p class="font-DanaMedium block lg:hidden"> پارسا وصالی عزیز؛ خوش اومدی 🙌 </p>
+                    <div class="grid grid-cols-12 gap-6 lg:gap-12 mt-6">
+                        <div class="col-span-12 xl:col-span-5">
+                            <p class="text-lg">آخرین علاقمندی ها :</p>
+
+                            <div
+                                    class="bg-white shadow child:flex child:items-center child:gap-x-2 mt-4 px-4 py-7 dark:bg-zinc-700 rounded-lg flex flex-col">
+                                {% for foo in product %}
+
+                                    <span>
+                                <img width="50" height="50" src="{{ foo.image1.url }}">
+                                        <br>
+                                    <a href="{% url 'dashboard:favorite' %}">
+                                        <span
+                                            class="font-DanaMedium text-blue-500">{{ foo.title }} </span>
+                                    </a>
+                                </span>
+
+                                <span class="border-t-2 border-dashed border-gray-200 dark:border-white/20 my-5"></span>
+                                {% endfor %}
+                            </div>
+                        </div>
+
+                        {#                    ticket#}
+
+                        <div class="col-span-12 xl:col-span-7">
+                            <p class="text-lg"> سفارش های اخیر من :</p>
+                            <div class="relative mt-4 overflow-x-auto shadow rounded-lg">
+                                <table class="w-full text-sm text-right text-gray-500 dark:text-gray-400">
+
+                                    <thead
+                                            class="text-xs text-gray-700  bg-gray-50 dark:bg-zinc-700 dark:text-gray-200">
+                                    {% if other_order %}
+                                        <tr>
+                                            <th scope="col" class="px-6 py-3.5">
+                                                نام محصول
+                                            </th>
+                                            <th scope="col" class="px-6 py-3.5">
+                                                تاریخ
+                                            </th>
+                                            <th scope="col" class="px-6 py-3.5">
+                                                قیمت
+                                            </th>
+                                            <th scope="col" class="px-6 py-3.5">
+                                                وضعیت
+                                            </th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        {% for order in other_order %}
+                                            <tr
+                                                    class="bg-white border-b dark:bg-zinc-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-zinc-600">
+                                                <th scope="row"
+                                                    class="px-6 py-5 font-medium text-blue-400 whitespace-nowrap dark:text-white">
+                                                    <a href="{% url 'dashboard:detail_order' order.pk %} "> مشاهده
+                                                        جزییات سفارش</a>
+                                                </th>
+                                                <td class="px-6 py-5">
+                                                    {{ order.created_at }}
+                                                </td>
+                                                <td class="px-6 py-5">
+                                                    {{ order.total_price }}
+                                                </td>
+                                                <td class="px-6 py-5 text-red-500">
+                                                    {{ order.get_status_display }}
+                                                </td>
+                                            </tr>
+                                        {% endfor %}
+
+                                    {% else %}
+                                        <th scope="col" class="px-6 py-3.5">
+
+                                        </th>
+                                    {% endif %}
+
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+
+
+                        <div class="col-span-12 xl:col-span-5">
+                            <p class="text-lg"> آدرس ها :</p>
+
+                            <div class="mt-4 grid grid-cols-12 gap-4 child:bg-white child:dark:bg-zinc-700">
+                                <div class="col-span-12 shadow sm:col-span-8 p-2  rounded-lg flex gap-x-4 items-center">
+                                    <span class="bg-green-500/20 w-12 h-12 rounded-lg flex items-center justify-center">
+                                        <svg class="w-6 h-6 text-green-500">
+                                            <use href="#map"></use>
+                                        </svg>
+                                    </span>
+                                    <a href="{% url 'dashboard:address' %}"
+                                       class="flex w-[75%] justify-between items-center gap-x-2">
+                                        <p>آدرس های من</p>
+                                        <svg class="w-5 h-5">
+                                            <use href="#arrow-left"></use>
+                                        </svg>
+                                    </a>
+                                </div>
+                                <div class=" shadow justify-start col-span-6 sm:col-span-2 p-2  rounded-lg flex gap-x-4 items-center sm:justify-center">
+                                    <a href="dashboard-account.html"
+                                       class="bg-green-500/20 w-12 h-12 rounded-lg flex items-center justify-center">
+                                        <svg class="w-6 h-6 text-green-500">
+                                            <use href="#cog"></use>
+                                        </svg>
+                                    </a>
+                                    <p class="block sm:hidden">تنطیمات</p>
+                                </div>
+                                <div class=" shadow justify-start col-span-6 sm:col-span-2 p-2  rounded-lg flex gap-x-4 items-center sm:justify-center">
+                                    <a href="{% url 'home:landing' %}"
+                                       class="bg-green-500/20 w-12 h-12 rounded-lg flex items-center justify-center">
+                                        <svg class="w-6 h-6 text-green-500">
+                                            <use href="#arrow-left-start-on-rectangle"></use>
+                                        </svg>
+                                    </a>
+                                    <p class="block sm:hidden">خروج</p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+{% endblock %}
+
+
+<!-- OVERLAY -->
+<div class="overlay hidden fixed w-full h-full top-0 left-0 right-0 bg-black/40 z-40 transition-all duration-300">
+</div>

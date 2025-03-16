@@ -1,6 +1,6 @@
-
 import os
 from pathlib import Path
+from .local_settings import *
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -12,14 +12,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-(g+tp5ki-e#wzta81erpbv%1i0=vgq=np%8di1kryzgw&n9*7@'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
 
-ALLOWED_HOSTS = []
 
 # Application definition
 
 INSTALLED_APPS = [
-    'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -27,6 +24,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'cart.apps.CartConfig',
     'jalali_date',
+    "admin_interface",
+    "colorfield",
+    'django.contrib.admin',
 
     # my app
     'home.apps.HomeConfig',
@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'product.apps.ProductConfig',
     'article.apps.ArticleConfig',
     'contactus.apps.ContactConfig',
+    'dashboard.apps.DashboardConfig',
 
 ]
 
@@ -74,8 +75,11 @@ WSGI_APPLICATION = 'shop_project.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': DB_NAME,
+        'PASSWORD': DB_PASS,
+        'USER': DB_USER,
+        'HOST': DB_HOST,
     }
 }
 
@@ -113,12 +117,17 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+STATIC_ROOT = os.path.join(BASE_DIR,'staticfiles')
 MEDIA_URL = 'media/'
-MEDIA_ROOT = os.path.join(BASE_DIR,'media')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+# customize user
 AUTH_USER_MODEL = "account.User"
 
+# customize admin panel
 
+X_FRAME_OPTIONS = "SAMEORIGIN"
+SILENCED_SYSTEM_CHECKS = ["security.W019"]

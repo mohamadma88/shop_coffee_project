@@ -8,5 +8,4 @@ urlpatterns = [
     path('delete/<str:id>', CartDelete.as_view(), name='delete'),
     path('order/<int:pk>', OrderDetail.as_view(), name='order'),
     path('order/create', OrderCreation.as_view(), name='order_create'),
-
 ]
