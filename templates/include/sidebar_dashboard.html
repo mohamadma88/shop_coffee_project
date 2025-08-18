@@ -44,6 +44,13 @@
                         </svg>
                         <a href="{% url 'dashboard:address' %}">آدرس ها</a>
                     </li>
+                    <li class="{% if request.resolver_match.url_name == 'ticket' %}active bg-green-500/10 text-green-500{% endif %}">
+                        <svg class="w-5 h-5 mb-2">
+                                <use href="#envelope"></use>
+                            </svg>
+                        <a href="{% url 'dashboard:ticket' %}">تیکت</a>
+
+                    </li>
 
                     <li class="text-red-400 hover:bg-red-500/20">
                         <svg class="w-6 h-6 ">

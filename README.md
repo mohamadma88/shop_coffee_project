@@ -12,6 +12,7 @@ users to view and purchase various products. Users can log in using their phone 
 - Users can view and edit their personal information.
 - Review purchase and order status.
 - view the products you are interested in.
+- Users can submit Tickets 
 
 ### 3. Product Search and Filtering
 - Search capabilities to find specific products.

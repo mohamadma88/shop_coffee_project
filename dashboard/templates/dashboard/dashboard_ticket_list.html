@@ -59,7 +59,6 @@
                                 </ul>
                             </div>
                         </button>
-
                         <a href="{% url 'home:landing' %}" class="hidden lg:flex items-center gap-x-0.5 text-green-500">
                             صفحه اصلی
                             <svg class="w-4 h-4">
@@ -73,58 +72,51 @@
                     <div class="grid grid-cols-12 gap-6 lg:gap-12 mt-6">
 
                         <div class="col-span-12">
-                            <p class="text-lg"> سفارش های من :</p>
-                            <div class="relative mt-4 overflow-x-auto shadow rounded-lg">
+                            <p class="text-lg"> لیست تیکت ها :</p>
+                            {% for tickets in tickets %}
+
+                                <div class="relative mt-4 overflow-x-auto shadow rounded-lg">
                                 <table class="w-full text-sm text-right text-gray-500 dark:text-gray-400">
-                                    <thead
-                                            class="text-xs text-gray-700  bg-gray-50 dark:bg-zinc-700 dark:text-gray-200">
-
-                                        <tr>
-                                            <th scope="col" class="px-6 py-3.5">
-                                                نام محصول
-                                            </th>
-                                            <th scope="col" class="px-6 py-3.5">
-                                                تاریخ
-                                            </th>
-                                            <th scope="col" class="px-6 py-3.5">
-                                                قیمت
-                                            </th>
-                                            <th scope="col" class="px-6 py-3.5">
-                                                وضعیت
-                                            </th>
-                                            <th scope="col" class="px-6 py-3.5">
-                                                پاسخ
-                                            </th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
+                                <thead
+                                        class="text-xs text-gray-700  bg-gray-50 dark:bg-zinc-700 dark:text-gray-200">
+                                <tr>
+                                    <th scope="col" class="px-6 py-3.5">
+                                        عنوان تیکت
+                                    </th>
+                                    <th scope="col" class="px-6 py-3.5">
+                                        وضعیت
+                                    </th>
+                                </tr>
+                                </thead>
+                                <tbody>
 
 
 
-                                        {% for order in other_order %}
-
-                                                <tr
-                                                        class="bg-white border-b dark:bg-zinc-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-zinc-600">
-                                                    <th scope="row"
-                                                        class="px-6 py-5 font-medium text-blue-400 whitespace-nowrap dark:text-white">
-                                                                            <a href="{% url 'dashboard:detail_order' order.pk %}"> مشاهده جزییات سفارش</a>
-                                                    </th>
-                                                    <td class="px-6 py-5">
-                                                        {{ order.created_at }}
-                                                    </td>
-                                                    <td class="px-6 py-5">
-                                                        {{ order.total_price }}
-                                                    </td>
-                                                    <td class="px-6 py-5 text-red-500">
-                                                        {{ order.get_status_display }}
-                                                    </td>
-                                                </tr>
-
-                                        {% endfor %}
 
 
-                                    </tbody>
-                                </table>
+                                <tr
+                                        class="bg-white border-b dark:bg-zinc-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-zinc-600">
+                                    <th scope="row"
+                                        class="px-6 py-5 font-medium text-blue-400 whitespace-nowrap dark:text-white">
+                                        <a href="{% url 'dashboard:ticket_detail' tickets.id %}">{{ tickets.subject }}</a>
+                                    </th>
+                                    <td class="px-6 py-5">
+                                        {{ tickets.status }}
+                                    </td>
+                                </tr>
+                            {% empty %}
+                                <p>تیکتی وجود ندارد</p>
+
+
+                            <a href="{% url 'dashboard:ticket' %}" class="main-btn p-2 gap-x-1 shadow">
+                            میخواهید تیکت بزنید؟
+                                <svg class="w-5 h-5">
+                                    <use href="#add"></use>
+                                </svg>
+                            </a>
+                                 {% endfor %}
+                            </tbody>
+                            </table>
                             </div>
 
                         </div>

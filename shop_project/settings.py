@@ -1,6 +1,6 @@
 import os
 from pathlib import Path
-from .local_settings import *
+# from .local_settings import *
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -72,14 +72,15 @@ WSGI_APPLICATION = 'shop_project.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
-
+ALLOWED_HOSTS = []
+DEBUG = True
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': DB_NAME,
-        'PASSWORD': DB_PASS,
-        'USER': DB_USER,
-        'HOST': DB_HOST,
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'sqlite3',
+        # 'PASSWORD': DB_PASS,
+        # 'USER': DB_USER,
+        # 'HOST': DB_HOST,
     }
 }
 
