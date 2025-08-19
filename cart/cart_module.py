@@ -1,4 +1,5 @@
 from product.models import Product
+from django.contrib import messages
 
 CART_SESSION_ID = 'cart'
 
@@ -25,14 +26,40 @@ class Cart:
         result = f'{id}'
         return result
 
-    def add(self, product, quantity):
-        unique = self.unique_id_generator(product.id)
-        if unique not in self.cart:
-            self.cart[unique] = {'quantity': 0, 'price': str(product.price),
-                                 'id': str(product.id)}
+    def add(self, product, quantity, request=None):
 
-            self.cart[unique]['quantity'] += int(quantity)
-            self.session.modified = True
+        unique = self.unique_id_generator(product.id)
+        try:
+            quantity = int(quantity)
+        except:
+            quantity = 1
+
+        max_allowed = 5
+        if product.stock < 3:
+            max_allowed = product.stock
+
+        quantity = min(quantity, max_allowed)
+
+        if unique not in self.cart:
+            self.cart[unique] = {
+                'quantity': 0,
+                'price': str(product.price),
+                'id': str(product.id)
+            }
+
+        new_quantity = self.cart[unique]['quantity'] + quantity
+
+        if new_quantity > max_allowed:
+            new_quantity = max_allowed
+            if request:
+                messages.warning(request, f"حداکثر تعداد قابل خرید برای این محصول {max_allowed} عدد است.")
+
+        self.cart[unique]['quantity'] = new_quantity
+        self.session.modified = True
+
+        if request:
+            messages.success(request,
+                             f"{product.name} به سبد خرید اضافه شد (تعداد: {self.cart[unique]['quantity']})")
 
     def total(self):
         cart = self.cart.values()
@@ -45,7 +72,7 @@ class Cart:
     def delete(self, id):
         if id in self.cart:
             del self.cart[id]
-            self.save()
+        self.save()
 
     def save(self):
         self.session.modified = True

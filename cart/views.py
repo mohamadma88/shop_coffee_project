@@ -12,9 +12,10 @@ class CartView(View):
 
 
 class AddCart(View):
+
     def post(self, request, pk):
         product = get_object_or_404(Product, id=pk)
-        quantity = request.POST.get('quantity')
+        quantity = request.POST.get('quantity', 1)
         cart = Cart(request)
         cart.add(product, quantity)
 
@@ -44,6 +45,3 @@ class OrderCreation(View):
 
             cart.remove_cart()
             return redirect('cart:order', order.id)
-
-
-

@@ -22,6 +22,7 @@ users to view and purchase various products. Users can log in using their phone 
 ### 4. Shopping Cart
 - Users can add desired products to their shopping cart and manage it.
 - View total price and applied discounts.
+- Number of products and warehouse for better product management and prevention of wrong purchases 
 
 ### 5. Secure Payment
 - Online payment through trusted and secure gateways
