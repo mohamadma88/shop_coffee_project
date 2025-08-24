@@ -77,3 +77,19 @@ class Like(models.Model):
 
     def __str__(self):
         return self.user.phone
+
+
+class RatingProduct(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    score = models.IntegerField(choices=[(i, str(i)) for i in range(1, 6)])
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        unique_together = ('user', 'product',)
+        ordering = ['-created_at']
+
+    def __str__(self):
+        return f'{self.user.phone} rated {self.product.title} with {self.score}'
+

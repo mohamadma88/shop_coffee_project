@@ -1,7 +1,10 @@
 from django.http import JsonResponse
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic import DetailView, TemplateView, ListView
-from .models import Product, Category, ProductReview, Like
+from .models import Product, Category, ProductReview, Like, RatingProduct
+from django.views.decorators.http import require_POST
+from django.contrib.auth.decorators import login_required
+from django.db.models import Avg
 
 
 def detail(request, pk):
@@ -71,7 +74,40 @@ def like(request, pk):
                 Like.objects.create(product_id=pk, user_id=request.user.id)
                 return JsonResponse({'action': 'liked'})
         except Exception as e:
-            return JsonResponse({'error': str(e)},)
+            return JsonResponse({'error': str(e)}, )
 
 
+@login_required
+@require_POST
+def rate_product(request):
+    user = request.user
+    product_id = request.POST.get('product_id')
+    score = request.POST.get('score')
+
+    if not product_id or not score:
+        return JsonResponse({'status': 'error', 'message': 'اطلاعات ناقص است'})
+
+    try:
+        product = Product.objects.get(id=product_id)
+        score = int(score)
+        if score < 1 or score > 5:
+            raise ValueError
+    except (Product.DoesNotExist, ValueError):
+        return JsonResponse({'status': 'error', 'message': 'داده نامعتبر است'})
+
+    rating, created = RatingProduct.objects.update_or_create(
+        user=user,
+        product=product,
+        defaults={'score': score}
+    )
+    print(rating)
+    print(created)
+
+    avg_score = RatingProduct.objects.filter(product=product).aggregate(Avg('score'))['score__avg']
+
+    return JsonResponse({
+    'status': 'success',
+    'score': rating.score,
+    'avg_score': round(avg_score, 2)
+})
 

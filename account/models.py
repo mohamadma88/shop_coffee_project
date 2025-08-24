@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import BaseUserManager, AbstractBaseUser
+from .validator import validate_phone
 
 
 class UserManager(BaseUserManager):
@@ -34,16 +35,10 @@ class UserManager(BaseUserManager):
 
 
 class User(AbstractBaseUser):
-    email = models.EmailField(
-        verbose_name="email",
-        max_length=11,
-        unique=False,
-        null=True,
-        blank=True
-    )
     is_active = models.BooleanField(default=True, verbose_name='فعال ؟')
     is_admin = models.BooleanField(default=False, verbose_name='ادمین')
     phone = models.CharField(unique=True, max_length=12, verbose_name='شماره تلفن')
+    validators = [validate_phone]
     objects = UserManager()
 
     USERNAME_FIELD = "phone"

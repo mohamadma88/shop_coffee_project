@@ -28,12 +28,11 @@ class Login(View):
                 login(request, user)
                 next_page = request.POST.get('next')
                 if next_page:
-                    return redirect('next_page')
+                    return redirect(next_page)
                 return redirect('/')
             else:
-                form.add_error('phone', 'invalid user data')
-        else:
-            form.add_error('phone', 'invalid data')
+                form.add_error('phone', 'اطلاعات ورود نامعتبر است')
+
         return render(request, 'account/login.html', {'form': form})
 
 
@@ -119,3 +118,5 @@ def delete_address(request, pk):
     address = get_object_or_404(Address, user=request.user, pk=pk)
     address.delete()
     return redirect('dashboard:dashboard_address')
+
+
