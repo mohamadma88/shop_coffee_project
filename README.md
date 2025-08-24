@@ -7,6 +7,7 @@ users to view and purchase various products. Users can log in using their phone 
 
 ### 1. Quick Login
 - Users can quickly log into their accounts using their mobile phone number and a verification code (OTP).
+- The user cannot enter any fake phone numbers and web speed reductions of up to 30% are prevented.
 
 ### 2. Profile Management
 - Users can view and edit their personal information.
@@ -18,6 +19,7 @@ users to view and purchase various products. Users can log in using their phone 
 - Search capabilities to find specific products.
 - Product list and detail product
 - Filter products by caffeine amount , price, Category
+- Rating product(Only for registered users to avoid spam)
 
 ### 4. Shopping Cart
 - Users can add desired products to their shopping cart and manage it.

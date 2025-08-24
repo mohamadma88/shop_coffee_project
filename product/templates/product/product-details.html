@@ -312,128 +312,70 @@
                                 </div>
                             </div>
                             <!-- PRODUCT FOOTER -->
-{#                            <div class="flex items-center justify-between px-2 lg:px-4 mb-3">#}
-{#                                <div class="flex items-center gap-x-2 child:transition-all child:duration-300">#}
-{#                                <span#}
-{#                                        class="rounded-full p-2 dark:bg-zinc-800 dark:hover:bg-green-500 bg-gray-100 hover:bg-green-600 hover:text-white">#}
-{#                                    <svg class="w-4 h-4">#}
-{#                                        <use href="#shopping-cart"></use>#}
-{#                                    </svg>#}
-{#                                </span>#}
-{#                                </div>#}
-{#                                <div class="flex items-center">#}
-{#                                    <svg class="w-4 h-4 text-gray-300">#}
-{#                                        <use href="#star"></use>#}
-{#                                    </svg>#}
-{#                                    <svg class="w-4 h-4 text-yellow-400">#}
-{#                                        <use href="#star"></use>#}
-{#                                    </svg>#}
-{#                                    <svg class="w-4 h-4 text-yellow-400">#}
-{#                                        <use href="#star"></use>#}
-{#                                    </svg>#}
-{#                                    <svg class="w-4 h-4 text-yellow-400">#}
-{#                                        <use href="#star"></use>#}
-{#                                    </svg>#}
-{#                                    <svg class="w-4 h-4 text-yellow-400">#}
-{#                                        <use href="#star"></use>#}
-{#                                    </svg>#}
-{#                                </div>#}
-{##}
-{#                                <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>#}
-{#                                <script>#}
-{#                                    $(document).ready(function () {#}
-{#                                        $('.star').click(function () {#}
-{#                                            let star = $(this);#}
-{#                                            let score = star.data('score');#}
-{#                                            let product_id = star.closest('.product-rating').data('product-id');#}
-{##}
-{#                                            $.ajax({#}
-{#                                                url: "{% url 'product:ajax_rate_product' %}",#}
-{#                                                type: "POST",#}
-{#                                                data: {#}
-{#                                                    'product_id': product_id,#}
-{#                                                    'score': score,#}
-{#                                                    'csrfmiddlewaretoken': '{{ csrf_token }}'#}
-{#                                                },#}
-{#                                                success: function (response) {#}
-{#                                                    if (response.status === 'success') {#}
-{#                                                        alert(امتیاز#}
-{#                                                        شما#}
-{#                                                        ثبت#}
-{#                                                        شد#}
-{#                                                        !میانگین#}
-{#                                                    : ${response.avg_score}#}
-{#                                                    )#}
-{#                                                        ;#}
-{#                                                        // می‌تونی اینجا رنگ ستاره ها رو بر اساس امتیاز بروزرسانی کنی#}
-{#                                                    } else {#}
-{#                                                        alert(response.message);#}
-{#                                                    }#}
-{#                                                }#}
-{#                                            });#}
-{#                                        });#}
-{#                                    });#}
-{#                                </script>#}
-{#                            </div>#}
-                        <div class="flex items-center justify-between px-2 lg:px-4 mb-3 product-rating" data-product-id="{{ product.id }}">
-    <div class="flex items-center gap-x-2 child:transition-all child:duration-300">
+                            <div class="flex items-center justify-between px-2 lg:px-4 mb-3 product-rating"
+                                 data-product-id="{{ product.id }}">
+                                <div class="flex items-center gap-x-2 child:transition-all child:duration-300">
         <span class="rounded-full p-2 dark:bg-zinc-800 dark:hover:bg-green-500 bg-gray-100 hover:bg-green-600 hover:text-white">
             <svg class="w-4 h-4">
                 <use href="#shopping-cart"></use>
             </svg>
         </span>
-    </div>
+                                </div>
 
-    <div class="flex items-center">
-        <!-- ستاره‌ها با کلاس star و data-score -->
-        {% for i in "12345" %}
-            <svg class="w-4 h-4 star {% if i <= product.average_score %}text-yellow-400{% else %}text-gray-300{% endif %}"
-                 data-score="{{ i }}" style="cursor:pointer">
-                <use href="#star"></use>
-            </svg>
-        {% endfor %}
-    </div>
-</div>
+                                <div class="flex items-center">
+                                    {% for i in "12345" %}
+                                        <svg class="w-4 h-4 star {% if i <= product.average_score %}text-yellow-400{% else %}text-gray-300{% endif %}"
+                                             data-score="{{ i }}" style="cursor:pointer">
+                                            <use href="#star"></use>
+                                        </svg>
+                                    {% endfor %}
+                                </div>
+                            </div>
 
-<!-- jQuery در انتهای صفحه -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
-$(document).ready(function () {
-    $('.star').click(function () {
-        let star = $(this);
-        let score = star.data('score');
-        let product_id = star.closest('.product-rating').data('product-id');
+                            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+                            <script>
+                                $(document).ready(function () {
+                                    $('.star').click(function () {
+                                        let star = $(this);
+                                        let score = star.data('score');
+                                        let product_id = star.closest('.product-rating').data('product-id');
 
-        $.ajax({
-            url: "{% url 'product:ajax_rate_product' %}",
-            type: "POST",
-            data: {
-                'product_id': product_id,
-                'score': score,
-                'csrfmiddlewaretoken': '{{ csrf_token }}'
-            },
-            success: function (response) {
-                if (response.status === 'success') {
-                    alert(امتیاز شما ثبت شد! میانگین: ${response.avg_score});
+                                        $.ajax({
+                                            url: "{% url 'product:ajax_rate_product' %}",
+                                            type: "POST",
+                                            data: {
+                                                'product_id': product_id,
+                                                'score': score,
+                                                'csrfmiddlewaretoken': '{{ csrf_token }}'
+                                            },
+                                            success: function (response) {
+                                                if (response.status === 'success') {
+                                                    alert(امتیاز
+                                                    شما
+                                                    ثبت
+                                                    شد
+                                                    !میانگین
+                                                : ${response.avg_score}
+                                                )
+                                                    ;
 
-                    // بروزرسانی رنگ ستاره‌ها بر اساس امتیاز ثبت شده
-                    star.closest('.product-rating').find('.star').each(function() {
-                        let s = $(this).data('score');
-                        if(s <= response.score) {
-                            $(this).removeClass('text-gray-300').addClass('text-yellow-400');
-                        } else {
-                            $(this).removeClass('text-yellow-400').addClass('text-gray-300');
-                        }
-                    });
+                                                    star.closest('.product-rating').find('.star').each(function () {
+                                                        let s = $(this).data('score');
+                                                        if (s <= response.score) {
+                                                            $(this).removeClass('text-gray-300').addClass('text-yellow-400');
+                                                        } else {
+                                                            $(this).removeClass('text-yellow-400').addClass('text-gray-300');
+                                                        }
+                                                    });
 
-                } else {
-                    alert(response.message);
-                }
-            }
-        });
-    });
-});
-</script>
+                                                } else {
+                                                    alert(response.message);
+                                                }
+                                            }
+                                        });
+                                    });
+                                });
+                            </script>
                         </div>
                     {% endfor %}
 
